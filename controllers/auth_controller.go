@@ -2,11 +2,15 @@ package controllers
 
 import (
 	"github.com/gin-gonic/gin"
+	"go_server/global"
 	"go_server/models"
 	"go_server/utils"
 	"net/http"
 )
 
+//		Register
+//	 @Description: 注册用户并返回Token
+//	 @param ctx
 func Register(ctx *gin.Context) {
 	var user models.User
 	/*
@@ -19,6 +23,7 @@ func Register(ctx *gin.Context) {
 		return
 	}
 	hashedPwd, err := utils.HashPassword(user.Password)
+
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
@@ -26,4 +31,21 @@ func Register(ctx *gin.Context) {
 
 	user.Password = hashedPwd
 
+	token, err := utils.GenerateJWT(user.Username)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	if err := global.DB.AutoMigrate(&user); err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{
+			"error": err.Error(),
+		})
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{
+		"token": token,
+	})
 }

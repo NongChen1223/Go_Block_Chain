@@ -22,6 +22,10 @@ type Config struct {
 		MaxIdleCones int
 		MaxOpenCones int
 	}
+	JWT struct {
+		PrivateKey     string
+		ExpirationHour int
+	}
 }
 
 var AppConfig *Config
