@@ -3,16 +3,18 @@ package controllers
 import (
 	"github.com/gin-gonic/gin"
 	"go_server/global"
-	"go_server/models"
+	"go_server/system/models"
 	"go_server/utils"
 	"net/http"
 )
 
-//		Register
-//	 @Description: 注册用户并返回Token
-//	 @param ctx
-func Register(ctx *gin.Context) {
-	var user models.User
+/**
+ * SysUserRegister
+ *  @Description: 注册一个账号
+ *  @param ctx
+ */
+func SysUserRegister(ctx *gin.Context) {
+	var user models.SysUser
 	/*
 		ShouldBindJSON传入数据对应的结构体
 		如果json数据与传入的结构体数据相符合(可以有多余字段，但是不能缺少字段)

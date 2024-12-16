@@ -3,7 +3,7 @@ package router
 import (
 	"github.com/gin-gonic/gin"
 	"go_server/config"
-	"go_server/services"
+	"go_server/system/services"
 )
 
 /*
