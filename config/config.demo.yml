@@ -1,0 +1,19 @@
+App:
+  Name:          # 应用程序名称
+  Port: :        # 应用程序运行的端口
+
+Database:
+  Host:     # 数据库主机地址
+  Port:          # 数据库端口
+  User:         # 数据库用户名
+  Password:   # 数据库密码
+  Name:    # 数据库名称
+  Charset: utf8mb4  # 字符集
+  ParseTime: True  # 是否解析时间段
+  Loc: Local    # 时区
+  MaxIdleCones: 10 #空闲连接池中连接的最大数量
+  MaxOpenCones: 100 #数据库连接的最大数量
+
+JWT:
+  PrivateKey:  #JWT秘钥
+  ExpirationHour:  #JWT有效小时

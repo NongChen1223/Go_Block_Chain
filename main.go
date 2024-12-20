@@ -7,7 +7,8 @@ import (
 )
 
 func main() {
+	fmt.Println("Initializing application...") // 提前打印初始化信息
 	config.InitConfig()
+	fmt.Println("App start...", config.AppConfig.App.Port)
 	router.InitRouter()
-	fmt.Print(config.AppConfig.App.Port)
 }
