@@ -1,10 +1,7 @@
 package utils
 
 import (
-	"github.com/golang-jwt/jwt/v5"
-	"go_server/config"
 	"golang.org/x/crypto/bcrypt"
-	"time"
 )
 
 /**
@@ -34,22 +31,4 @@ func CompareHashAndPassword(e string, p string) (bool, error) {
 		return false, err
 	}
 	return true, nil
-}
-
-/**
- *  GenerateJWT
- *  @Description: 用用户名生成一个JWT
- *  @param username
- *  @return string
- *  @return error
- */
-func GenerateJWT(username string) (string, error) {
-	token := jwt.NewWithClaims(
-		jwt.SigningMethodHS256, //加密方式 可选
-		jwt.MapClaims{
-			"username": username,                                                                              //用户名
-			"exp":      time.Now().Add(time.Hour * time.Duration(config.AppConfig.JWT.ExpirationHour)).Unix(), //过期时间时间戳 获取当前时间 + 72小时 Unix()转时间戳方法
-		})
-	signedToken, err := token.SignedString([]byte(config.AppConfig.JWT.PrivateKey))
-	return "Bearer" + signedToken, err
 }
